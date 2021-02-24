@@ -1,24 +1,29 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
+// import 'dart:html';
+
+// import 'package:flutter/material.dart';
 import 'package:flutter_audio_query/flutter_audio_query.dart';
-import 'package:music_player/screens/album.dart';
+
+// import 'package:flutter/material.dart';
+// import 'package:flutter_audio_query/flutter_audio_query.dart';
 // import 'package:music_player/screens/aboutus.dart';
 import 'package:music_player/screens/music_player.dart';
 // import 'package:music_player/screens/search_screen.dart';
 import 'package:music_player/screens/setting.dart';
 import 'package:music_player/screens/singers.dart';
+import 'package:music_player/screens/tracks.dart';
 import 'package:music_player/utils/coustom_colors.dart';
 import 'package:url_launcher/url_launcher.dart';
 // import 'package:permission_handler/permission_handler.dart';
 // import 'package:path_provider_ex/path_provider_ex.dart';
 // import 'package:flutter_file_manager/flutter_file_manager.dart';
 
-class Tracks extends StatefulWidget {
-  _TracksState createState() => _TracksState();
+class Album extends StatefulWidget {
+  @override
+  _AlbumState createState() => _AlbumState();
 }
 
-class _TracksState extends State<Tracks> {
+class _AlbumState extends State<Album> {
   Future<void> _launched;
   final FlutterAudioQuery audioQuery = FlutterAudioQuery();
   List<SongInfo> songs = [];
@@ -93,13 +98,13 @@ class _TracksState extends State<Tracks> {
   }
 
   @override
-  Widget build(context) {
+  Widget build(BuildContext context) {
     const String toLaunch = 'http://remerse.com/';
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
         title: Text(
-          'Music App',
+          'Albums',
           style: TextStyle(color: CustomColors().customPink),
         ),
         iconTheme: IconThemeData(color: CustomColors().customPink),
@@ -134,24 +139,19 @@ class _TracksState extends State<Tracks> {
             //         builder: (BuildContext context) => MusicPlayer()));
             //   },
             // ),
-            Container(
-              color: CustomColors().customPink,
-              child: ListTile(
-                leading: Icon(
-                  Icons.art_track,
-                  color: Colors.white,
-                ),
-                title: Text(
-                  "Music List",
-                  style: TextStyle(color: Colors.white),
-                ),
-                trailing: Icon(Icons.arrow_forward),
-                onTap: () {
-                  Navigator.of(context).pop();
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: (BuildContext context) => Tracks()));
-                },
+
+            ListTile(
+              leading: Icon(
+                Icons.art_track,
+                color: CustomColors().customPink,
               ),
+              title: Text("Music List"),
+              trailing: Icon(Icons.arrow_forward),
+              onTap: () {
+                Navigator.of(context).pop();
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (BuildContext context) => Tracks()));
+              },
             ),
             ListTile(
               leading: Icon(
@@ -160,6 +160,7 @@ class _TracksState extends State<Tracks> {
               ),
               title: Text(
                 "Artist",
+                // style: TextStyle(color: Colors.white),
               ),
               trailing: Icon(Icons.arrow_forward),
               onTap: () {
@@ -168,21 +169,24 @@ class _TracksState extends State<Tracks> {
                     builder: (BuildContext context) => Singres()));
               },
             ),
-            ListTile(
-              leading: Icon(
-                Icons.album,
-                color: CustomColors().customPink,
+            Container(
+              color: CustomColors().customPink,
+              child: ListTile(
+                leading: Icon(
+                  Icons.album,
+                  color: Colors.white,
+                ),
+                title: Text(
+                  "Albums",
+                  style: TextStyle(color: Colors.white),
+                ),
+                trailing: Icon(Icons.arrow_forward),
+                onTap: () {
+                  Navigator.of(context).pop();
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (BuildContext context) => Album()));
+                },
               ),
-              title: Text(
-                "Albums",
-                // style: TextStyle(color: Colors.white),
-              ),
-              trailing: Icon(Icons.arrow_forward),
-              onTap: () {
-                Navigator.of(context).pop();
-                Navigator.of(context).push(MaterialPageRoute(
-                    builder: (BuildContext context) => Album()));
-              },
             ),
             ListTile(
               leading: Icon(
@@ -220,12 +224,15 @@ class _TracksState extends State<Tracks> {
         itemCount: songs.length,
         itemBuilder: (context, index) => ListTile(
           leading: CircleAvatar(
-            backgroundImage: songs[index].albumArtwork == null
-                ? AssetImage('assets/images/music_gradient.jpg')
-                : FileImage(File(songs[index].albumArtwork)),
-          ),
-          title: Text(songs[index].title),
-          subtitle: Text(songs[index].artist),
+              backgroundImage:
+                  // songs[index].albumArtwork == null
+                  // ?
+                  AssetImage('assets/images/music_gradient.jpg')
+              // : FileImage(File(songs[index].albumArtwork)),
+              ),
+          title: Text(songs[index].album),
+          // title),
+          subtitle: Text(songs[index].albumId),
           onTap: () {
             currentIndex = index;
             Navigator.of(context).push(

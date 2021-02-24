@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_audio_query/flutter_audio_query.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:music_player/screens/aboutus.dart';
+import 'package:music_player/screens/album.dart';
 import 'package:music_player/screens/setting.dart';
+import 'package:music_player/screens/singers.dart';
 import 'package:music_player/screens/tracks.dart';
 import 'package:music_player/utils/coustom_colors.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -132,6 +134,39 @@ class MusicPlayerState extends State<MusicPlayer> {
                 Navigator.of(context).pop();
                 Navigator.of(context).push(MaterialPageRoute(
                     builder: (BuildContext context) => Tracks()));
+              },
+            ),
+            ListTile(
+              leading: Icon(
+                Icons.person,
+                color: CustomColors().customPink,
+              ),
+              title: Text(
+                "Artist",
+              ),
+              trailing: Icon(Icons.arrow_forward),
+              onTap: () {
+                dispose();
+                Navigator.of(context).pop();
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (BuildContext context) => Singres()));
+              },
+            ),
+            ListTile(
+              leading: Icon(
+                Icons.album,
+                color: CustomColors().customPink,
+              ),
+              title: Text(
+                "Albums",
+                // style: TextStyle(color: Colors.white),
+              ),
+              trailing: Icon(Icons.arrow_forward),
+              onTap: () {
+                dispose();
+                Navigator.of(context).pop();
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (BuildContext context) => Album()));
               },
             ),
             ListTile(
