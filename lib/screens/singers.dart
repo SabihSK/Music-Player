@@ -1,23 +1,21 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_audio_query/flutter_audio_query.dart';
-// import 'package:music_player/screens/aboutus.dart';
+import 'package:music_player/screens/album.dart';
+
 import 'package:music_player/screens/music_player.dart';
-// import 'package:music_player/screens/search_screen.dart';
 import 'package:music_player/screens/setting.dart';
-import 'package:music_player/screens/favorite_screen.dart';
+import 'package:music_player/screens/tracks.dart';
 import 'package:music_player/utils/coustom_colors.dart';
 import 'package:url_launcher/url_launcher.dart';
-// import 'package:permission_handler/permission_handler.dart';
-// import 'package:path_provider_ex/path_provider_ex.dart';
-// import 'package:flutter_file_manager/flutter_file_manager.dart';
 
-class Tracks extends StatefulWidget {
-  _TracksState createState() => _TracksState();
+import 'dart:io';
+
+class Singres extends StatefulWidget {
+  @override
+  _SingresState createState() => _SingresState();
 }
 
-class _TracksState extends State<Tracks> {
+class _SingresState extends State<Singres> {
   Future<void> _launched;
   final FlutterAudioQuery audioQuery = FlutterAudioQuery();
   List<SongInfo> songs = [];
@@ -92,13 +90,13 @@ class _TracksState extends State<Tracks> {
   }
 
   @override
-  Widget build(context) {
+  Widget build(BuildContext context) {
     const String toLaunch = 'http://remerse.com/';
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
         title: Text(
-          'Music App',
+          'Artist',
           style: TextStyle(color: CustomColors().customPink),
         ),
         iconTheme: IconThemeData(color: CustomColors().customPink),
@@ -133,6 +131,20 @@ class _TracksState extends State<Tracks> {
             //         builder: (BuildContext context) => MusicPlayer()));
             //   },
             // ),
+
+            ListTile(
+              leading: Icon(
+                Icons.art_track,
+                color: CustomColors().customPink,
+              ),
+              title: Text("Music List"),
+              trailing: Icon(Icons.arrow_forward),
+              onTap: () {
+                Navigator.of(context).pop();
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (BuildContext context) => Tracks()));
+              },
+            ),
             Container(
               color: CustomColors().customPink,
               child: ListTile(
@@ -140,29 +152,32 @@ class _TracksState extends State<Tracks> {
                   Icons.art_track,
                   color: Colors.white,
                 ),
-                title: Text("Music List"),
+                title: Text(
+                  "Artist",
+                  style: TextStyle(color: Colors.white),
+                ),
                 trailing: Icon(Icons.arrow_forward),
                 onTap: () {
                   Navigator.of(context).pop();
                   Navigator.of(context).push(MaterialPageRoute(
-                      builder: (BuildContext context) => Tracks()));
+                      builder: (BuildContext context) => Singres()));
                 },
               ),
             ),
             ListTile(
               leading: Icon(
-                Icons.list,
+                Icons.art_track,
                 color: CustomColors().customPink,
               ),
-              title: Text("My favorite"),
+              title: Text(
+                "Albums",
+                // style: TextStyle(color: Colors.white),
+              ),
               trailing: Icon(Icons.arrow_forward),
               onTap: () {
                 Navigator.of(context).pop();
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (BuildContext context) => FavoriteScreen(),
-                  ),
-                );
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (BuildContext context) => Album()));
               },
             ),
             ListTile(
@@ -205,8 +220,9 @@ class _TracksState extends State<Tracks> {
                 ? AssetImage('assets/images/music_gradient.jpg')
                 : FileImage(File(songs[index].albumArtwork)),
           ),
-          title: Text(songs[index].title),
-          subtitle: Text(songs[index].artist),
+          title: Text(songs[index].artist),
+          // title),
+          subtitle: Text(songs[index].artistId),
           onTap: () {
             currentIndex = index;
             Navigator.of(context).push(

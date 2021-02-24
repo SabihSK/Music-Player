@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:music_player/screens/singers.dart';
 import 'package:music_player/screens/splashScreen.dart';
 
 void main() {
@@ -11,7 +12,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Splashscreen(),
+      home:
+          // Singres(),
+          Splashscreen(),
     );
   }
 }
