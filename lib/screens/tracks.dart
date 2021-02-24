@@ -8,6 +8,8 @@ import 'package:music_player/screens/music_player.dart';
 import 'package:music_player/screens/setting.dart';
 import 'package:music_player/utils/coustom_colors.dart';
 import 'package:url_launcher/url_launcher.dart';
+
+import 'favorite_screen.dart';
 // import 'package:permission_handler/permission_handler.dart';
 // import 'package:path_provider_ex/path_provider_ex.dart';
 // import 'package:flutter_file_manager/flutter_file_manager.dart';
@@ -147,6 +149,22 @@ class _TracksState extends State<Tracks> {
                       builder: (BuildContext context) => Tracks()));
                 },
               ),
+            ),
+            ListTile(
+              leading: Icon(
+                Icons.list,
+                color: CustomColors().customPink,
+              ),
+              title: Text("My favorite"),
+              trailing: Icon(Icons.arrow_forward),
+              onTap: () {
+                Navigator.of(context).pop();
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (BuildContext context) => FavoriteScreen(),
+                  ),
+                );
+              },
             ),
             ListTile(
               leading: Icon(
