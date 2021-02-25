@@ -52,8 +52,6 @@ class SearchScreen extends SearchDelegate<String> {
               : ListTile(
                   onTap: () async {
                     // showResults(context);
-                    String path = searchedList[index].path;
-                    File file = File(path);
                     SystemChannels.textInput.invokeMethod('TextInput.hide');
                     await Future.delayed(Duration(milliseconds: 500));
 

@@ -1,8 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:music_player/screens/aboutus.dart';
 import 'package:music_player/screens/albums.dart';
-import 'package:music_player/screens/music_player.dart';
 import 'package:music_player/screens/artists.dart';
 import 'package:music_player/screens/tracks.dart';
 import 'package:music_player/utils/coustom_colors.dart';

@@ -1,17 +1,13 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_audio_query/flutter_audio_query.dart';
 import 'package:music_player/screens/album_songs.dart';
-import 'package:music_player/screens/albums.dart';
-import 'package:music_player/screens/artist_songs.dart';
 import 'package:music_player/screens/artists.dart';
-
-import 'package:music_player/screens/music_player.dart';
 import 'package:music_player/screens/setting.dart';
 import 'package:music_player/screens/tracks.dart';
 import 'package:music_player/utils/coustom_colors.dart';
 import 'package:url_launcher/url_launcher.dart';
-
-import 'dart:io';
 
 class Albums extends StatefulWidget {
   @override
