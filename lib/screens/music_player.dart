@@ -4,15 +4,13 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_audio_query/flutter_audio_query.dart';
 import 'package:just_audio/just_audio.dart';
-import 'package:music_player/screens/aboutus.dart';
+import 'package:music_player/screens/albums.dart';
 import 'package:music_player/screens/favorite_screen.dart';
-import 'package:music_player/screens/album.dart';
 import 'package:music_player/screens/setting.dart';
-import 'package:music_player/screens/singers.dart';
+import 'package:music_player/screens/artists.dart';
 import 'package:music_player/screens/tracks.dart';
 import 'package:music_player/utils/coustom_colors.dart';
 import 'package:music_player/utils/global_data.dart';
-import 'package:music_player/widgets/custom_slider.dart';
 import 'package:music_player/widgets/custom_toast.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -177,7 +175,7 @@ class MusicPlayerState extends State<MusicPlayer> {
                 dispose();
                 Navigator.of(context).pop();
                 Navigator.of(context).push(MaterialPageRoute(
-                    builder: (BuildContext context) => Singres()));
+                    builder: (BuildContext context) => Artists()));
               },
             ),
             ListTile(
@@ -194,7 +192,7 @@ class MusicPlayerState extends State<MusicPlayer> {
                 dispose();
                 Navigator.of(context).pop();
                 Navigator.of(context).push(MaterialPageRoute(
-                    builder: (BuildContext context) => Album()));
+                    builder: (BuildContext context) => Albums()));
               },
             ),
             ListTile(

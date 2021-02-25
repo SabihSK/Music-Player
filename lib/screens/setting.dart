@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:music_player/screens/aboutus.dart';
-import 'package:music_player/screens/album.dart';
+import 'package:music_player/screens/albums.dart';
 import 'package:music_player/screens/music_player.dart';
-import 'package:music_player/screens/singers.dart';
+import 'package:music_player/screens/artists.dart';
 import 'package:music_player/screens/tracks.dart';
 import 'package:music_player/utils/coustom_colors.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -95,7 +95,7 @@ class _SettingState extends State<Setting> {
               onTap: () {
                 Navigator.of(context).pop();
                 Navigator.of(context).push(MaterialPageRoute(
-                    builder: (BuildContext context) => Singres()));
+                    builder: (BuildContext context) => Artists()));
               },
             ),
             ListTile(
@@ -111,7 +111,7 @@ class _SettingState extends State<Setting> {
               onTap: () {
                 Navigator.of(context).pop();
                 Navigator.of(context).push(MaterialPageRoute(
-                    builder: (BuildContext context) => Album()));
+                    builder: (BuildContext context) => Albums()));
               },
             ),
             Container(
