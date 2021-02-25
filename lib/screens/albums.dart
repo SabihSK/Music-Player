@@ -9,6 +9,8 @@ import 'package:music_player/screens/tracks.dart';
 import 'package:music_player/utils/coustom_colors.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import 'favorite_screen.dart';
+
 class Albums extends StatefulWidget {
   @override
   _AlbumsState createState() => _AlbumsState();
@@ -134,6 +136,19 @@ class _AlbumsState extends State<Albums> {
                 Navigator.of(context).pop();
                 Navigator.of(context).push(MaterialPageRoute(
                     builder: (BuildContext context) => Albums()));
+              },
+            ),
+            ListTile(
+              leading: Icon(
+                Icons.art_track,
+                color: CustomColors().customPink,
+              ),
+              title: Text("My Favorites"),
+              trailing: Icon(Icons.arrow_forward),
+              onTap: () {
+                Navigator.of(context).pop();
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (BuildContext context) => FavoriteScreen()));
               },
             ),
             ListTile(

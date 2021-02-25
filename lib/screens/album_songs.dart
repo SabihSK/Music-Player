@@ -11,6 +11,7 @@ import 'dart:io';
 
 import 'albums.dart';
 import 'artists.dart';
+import 'favorite_screen.dart';
 
 class AlbumSongs extends StatefulWidget {
   final AlbumInfo albumInfo;
@@ -166,6 +167,19 @@ class _AlbumSongsState extends State<AlbumSongs> {
                     builder: (BuildContext context) => Albums(),
                   ),
                 );
+              },
+            ),
+            ListTile(
+              leading: Icon(
+                Icons.art_track,
+                color: CustomColors().customPink,
+              ),
+              title: Text("My Favorites"),
+              trailing: Icon(Icons.arrow_forward),
+              onTap: () {
+                Navigator.of(context).pop();
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (BuildContext context) => FavoriteScreen()));
               },
             ),
             ListTile(

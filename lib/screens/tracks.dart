@@ -184,6 +184,19 @@ class _TracksState extends State<Tracks> {
             ),
             ListTile(
               leading: Icon(
+                Icons.art_track,
+                color: CustomColors().customPink,
+              ),
+              title: Text("My Favorites"),
+              trailing: Icon(Icons.arrow_forward),
+              onTap: () {
+                Navigator.of(context).pop();
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (BuildContext context) => FavoriteScreen()));
+              },
+            ),
+            ListTile(
+              leading: Icon(
                 Icons.settings,
                 color: CustomColors().customPink,
               ),

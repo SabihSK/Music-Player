@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_audio_query/flutter_audio_query.dart';
 import 'package:music_player/screens/albums.dart';
 import 'package:music_player/screens/artist_songs.dart';
+import 'package:music_player/screens/favorite_screen.dart';
 import 'package:music_player/screens/setting.dart';
 import 'package:music_player/screens/tracks.dart';
 import 'package:music_player/utils/coustom_colors.dart';
@@ -134,6 +135,19 @@ class _ArtistsState extends State<Artists> {
                 Navigator.of(context).pop();
                 Navigator.of(context).push(MaterialPageRoute(
                     builder: (BuildContext context) => Albums()));
+              },
+            ),
+            ListTile(
+              leading: Icon(
+                Icons.art_track,
+                color: CustomColors().customPink,
+              ),
+              title: Text("My Favorites"),
+              trailing: Icon(Icons.arrow_forward),
+              onTap: () {
+                Navigator.of(context).pop();
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (BuildContext context) => FavoriteScreen()));
               },
             ),
             ListTile(
