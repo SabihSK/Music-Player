@@ -9,6 +9,9 @@ import 'package:music_player/screens/setting.dart';
 import 'package:music_player/screens/favorite_screen.dart';
 import 'package:music_player/utils/coustom_colors.dart';
 import 'package:url_launcher/url_launcher.dart';
+
+import 'albums.dart';
+import 'artists.dart';
 // import 'package:permission_handler/permission_handler.dart';
 // import 'package:path_provider_ex/path_provider_ex.dart';
 // import 'package:flutter_file_manager/flutter_file_manager.dart';
@@ -133,36 +136,50 @@ class _TracksState extends State<Tracks> {
             //         builder: (BuildContext context) => MusicPlayer()));
             //   },
             // ),
-            Container(
-              color: CustomColors().customPink,
-              child: ListTile(
-                leading: Icon(
-                  Icons.art_track,
-                  color: Colors.white,
-                ),
-                title: Text("Music List"),
-                trailing: Icon(Icons.arrow_forward),
-                onTap: () {
-                  Navigator.of(context).pop();
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: (BuildContext context) => Tracks()));
-                },
-              ),
-            ),
+
             ListTile(
               leading: Icon(
-                Icons.list,
+                Icons.music_note,
                 color: CustomColors().customPink,
               ),
-              title: Text("My favorite"),
+              title: Text("Music List"),
               trailing: Icon(Icons.arrow_forward),
               onTap: () {
                 Navigator.of(context).pop();
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (BuildContext context) => FavoriteScreen(),
-                  ),
-                );
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (BuildContext context) => Tracks()));
+              },
+            ),
+            ListTile(
+              leading: Icon(
+                Icons.track_changes,
+                color: CustomColors().customPink,
+              ),
+              title: Text(
+                "Artist",
+                style: TextStyle(color: Colors.black),
+              ),
+              trailing: Icon(Icons.arrow_forward),
+              onTap: () {
+                Navigator.of(context).pop();
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (BuildContext context) => Artists()));
+              },
+            ),
+            ListTile(
+              leading: Icon(
+                Icons.library_music_outlined,
+                color: CustomColors().customPink,
+              ),
+              title: Text(
+                "Albums",
+                // style: TextStyle(color: Colors.white),
+              ),
+              trailing: Icon(Icons.arrow_forward),
+              onTap: () {
+                Navigator.of(context).pop();
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (BuildContext context) => Albums()));
               },
             ),
             ListTile(
