@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:music_player/screens/albums.dart';
 import 'package:music_player/screens/artists.dart';
 import 'package:music_player/screens/tracks.dart';
+import 'package:music_player/screens/favorite_screen.dart';
 import 'package:music_player/utils/coustom_colors.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -68,9 +69,10 @@ class _SettingState extends State<Setting> {
             //         builder: (BuildContext context) => MusicPlayer()));
             //   },
             // ),
+
             ListTile(
               leading: Icon(
-                Icons.art_track,
+                Icons.music_note,
                 color: CustomColors().customPink,
               ),
               title: Text("Music List"),
@@ -83,11 +85,12 @@ class _SettingState extends State<Setting> {
             ),
             ListTile(
               leading: Icon(
-                Icons.person,
+                Icons.track_changes,
                 color: CustomColors().customPink,
               ),
               title: Text(
                 "Artist",
+                style: TextStyle(color: Colors.black),
               ),
               trailing: Icon(Icons.arrow_forward),
               onTap: () {
@@ -98,7 +101,7 @@ class _SettingState extends State<Setting> {
             ),
             ListTile(
               leading: Icon(
-                Icons.album,
+                Icons.library_music_outlined,
                 color: CustomColors().customPink,
               ),
               title: Text(
@@ -112,21 +115,31 @@ class _SettingState extends State<Setting> {
                     builder: (BuildContext context) => Albums()));
               },
             ),
-            Container(
-              color: CustomColors().customPink,
-              child: ListTile(
-                leading: Icon(
-                  Icons.settings,
-                  color: Colors.white,
-                ),
-                title: Text("Setting"),
-                trailing: Icon(Icons.arrow_forward),
-                onTap: () {
-                  Navigator.of(context).pop();
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: (BuildContext context) => Setting()));
-                },
+            ListTile(
+              leading: Icon(
+                Icons.art_track,
+                color: CustomColors().customPink,
               ),
+              title: Text("My Favorites"),
+              trailing: Icon(Icons.arrow_forward),
+              onTap: () {
+                Navigator.of(context).pop();
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (BuildContext context) => FavoriteScreen()));
+              },
+            ),
+            ListTile(
+              leading: Icon(
+                Icons.settings,
+                color: CustomColors().customPink,
+              ),
+              title: Text("Setting"),
+              trailing: Icon(Icons.arrow_forward),
+              onTap: () {
+                Navigator.of(context).pop();
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (BuildContext context) => Setting()));
+              },
             ),
             ListTile(
               leading: Icon(

@@ -203,68 +203,31 @@ class _AlbumSongsState extends State<AlbumSongs> {
           ],
         ),
       ),
-      body: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(left: 20, top: 20, bottom: 10),
-            child: Row(
-              children: [
-                Text(
-                  'Songs',
-                  style: TextStyle(
-                      fontSize: 22,
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold),
-                ),
-                Container(
-                  height: 30,
-                  width: 50,
-                  alignment: Alignment.center,
-                  margin: const EdgeInsets.only(left: 10),
-                  decoration: BoxDecoration(
-                    color: CustomColors().customPink,
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Text(
-                    songs.length.toString(),
-                    style: TextStyle(
-                      fontSize: 16,
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-              ],
-            ),
+      body: ListView.separated(
+        shrinkWrap: true,
+        separatorBuilder: (context, index) => Divider(),
+        itemCount: songs.length,
+        itemBuilder: (context, index) => ListTile(
+          leading: CircleAvatar(
+            backgroundImage: widget.albumInfo.albumArt == null
+                ? AssetImage('assets/images/music_gradient.jpg')
+                : Image.file(File(widget.albumInfo.albumArt)),
           ),
-          Expanded(
-            child: ListView.separated(
-              shrinkWrap: true,
-              separatorBuilder: (context, index) => Divider(),
-              itemCount: songs.length,
-              itemBuilder: (context, index) => ListTile(
-                leading: CircleAvatar(
-                  backgroundImage: widget.albumInfo.albumArt == null
-                      ? AssetImage('assets/images/music_gradient.jpg')
-                      : Image.file(File(widget.albumInfo.albumArt)),
+          title: Text(songs[index].title),
+          onTap: () {
+            currentIndex = index;
+            Navigator.of(context).pushAndRemoveUntil(
+              MaterialPageRoute(
+                builder: (context) => MusicPlayer(
+                  changeTrack: changeTrack,
+                  songInfo: songs[currentIndex],
+                  key: key,
                 ),
-                title: Text(songs[index].title),
-                onTap: () {
-                  currentIndex = index;
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => MusicPlayer(
-                        changeTrack: changeTrack,
-                        songInfo: songs[currentIndex],
-                        key: key,
-                      ),
-                    ),
-                  );
-                },
               ),
-            ),
-          ),
-        ],
+              (Route<dynamic> route) => false,
+            );
+          },
+        ),
       ),
     );
   }

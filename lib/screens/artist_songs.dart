@@ -98,7 +98,7 @@ class _ArtistSongsState extends State<ArtistSongs> {
         //   ),
         // ],
       ),
-     drawer: Drawer(
+      drawer: Drawer(
         child: ListView(
           children: <Widget>[
             // ListTile(
@@ -203,68 +203,31 @@ class _ArtistSongsState extends State<ArtistSongs> {
           ],
         ),
       ),
-      body: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(left: 20, top: 20, bottom: 10),
-            child: Row(
-              children: [
-                Text(
-                  'Songs',
-                  style: TextStyle(
-                      fontSize: 22,
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold),
-                ),
-                Container(
-                  height: 30,
-                  width: 50,
-                  alignment: Alignment.center,
-                  margin: const EdgeInsets.only(left: 10),
-                  decoration: BoxDecoration(
-                    color: CustomColors().customPink,
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Text(
-                    songs.length.toString(),
-                    style: TextStyle(
-                      fontSize: 16,
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-              ],
-            ),
+      body: ListView.separated(
+        shrinkWrap: true,
+        separatorBuilder: (context, index) => Divider(),
+        itemCount: songs.length,
+        itemBuilder: (context, index) => ListTile(
+          leading: CircleAvatar(
+            backgroundImage: widget.artistInfo.artistArtPath == null
+                ? AssetImage('assets/images/music_gradient.jpg')
+                : Image.file(File(widget.artistInfo.artistArtPath)),
           ),
-          Expanded(
-            child: ListView.separated(
-              shrinkWrap: true,
-              separatorBuilder: (context, index) => Divider(),
-              itemCount: songs.length,
-              itemBuilder: (context, index) => ListTile(
-                leading: CircleAvatar(
-                  backgroundImage: widget.artistInfo.artistArtPath == null
-                      ? AssetImage('assets/images/music_gradient.jpg')
-                      : Image.file(File(widget.artistInfo.artistArtPath)),
+          title: Text(songs[index].title),
+          onTap: () {
+            currentIndex = index;
+            Navigator.of(context).pushAndRemoveUntil(
+              MaterialPageRoute(
+                builder: (context) => MusicPlayer(
+                  changeTrack: changeTrack,
+                  songInfo: songs[currentIndex],
+                  key: key,
                 ),
-                title: Text(songs[index].title),
-                onTap: () {
-                  currentIndex = index;
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => MusicPlayer(
-                        changeTrack: changeTrack,
-                        songInfo: songs[currentIndex],
-                        key: key,
-                      ),
-                    ),
-                  );
-                },
               ),
-            ),
-          ),
-        ],
+              (Route<dynamic> route) => false,
+            );
+          },
+        ),
       ),
     );
   }

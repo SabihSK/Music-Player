@@ -94,6 +94,27 @@ class _TracksState extends State<Tracks> {
     }
   }
 
+  Future<bool> _onWillPop() async {
+    return (await showDialog(
+          context: context,
+          builder: (context) => new AlertDialog(
+            title: Text('Are you sure?'),
+            content: Text('Do you want to exit an App'),
+            actions: <Widget>[
+              FlatButton(
+                onPressed: () => Navigator.of(context).pop(false),
+                child: Text('No'),
+              ),
+              FlatButton(
+                onPressed: () => Navigator.of(context).pop(true),
+                child: Text('Yes'),
+              ),
+            ],
+          ),
+        )) ??
+        false;
+  }
+
   @override
   Widget build(context) {
     const String toLaunch = 'http://remerse.com/';
@@ -225,30 +246,33 @@ class _TracksState extends State<Tracks> {
           ],
         ),
       ),
-      body: ListView.separated(
-        shrinkWrap: true,
-        separatorBuilder: (context, index) => Divider(),
-        itemCount: songs.length,
-        itemBuilder: (context, index) => ListTile(
-          leading: CircleAvatar(
-            backgroundImage: songs[index].albumArtwork == null
-                ? AssetImage('assets/images/music_gradient.jpg')
-                : FileImage(File(songs[index].albumArtwork)),
-          ),
-          title: Text(songs[index].title),
-          subtitle: Text(songs[index].artist),
-          onTap: () {
-            currentIndex = index;
-            Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (context) => MusicPlayer(
-                  changeTrack: changeTrack,
-                  songInfo: songs[currentIndex],
-                  key: key,
+      body: WillPopScope(
+        onWillPop: _onWillPop,
+        child: ListView.separated(
+          shrinkWrap: true,
+          separatorBuilder: (context, index) => Divider(),
+          itemCount: songs.length,
+          itemBuilder: (context, index) => ListTile(
+            leading: CircleAvatar(
+              backgroundImage: songs[index].albumArtwork == null
+                  ? AssetImage('assets/images/music_gradient.jpg')
+                  : FileImage(File(songs[index].albumArtwork)),
+            ),
+            title: Text(songs[index].title),
+            subtitle: Text(songs[index].artist),
+            onTap: () {
+              currentIndex = index;
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => MusicPlayer(
+                    changeTrack: changeTrack,
+                    songInfo: songs[currentIndex],
+                    key: key,
+                  ),
                 ),
-              ),
-            );
-          },
+              );
+            },
+          ),
         ),
       ),
     );

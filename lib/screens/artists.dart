@@ -49,7 +49,7 @@ class _ArtistsState extends State<Artists> {
   @override
   Widget build(BuildContext context) {
     final double screenHeight = MediaQuery.of(context).size.height;
-    final double screenWidth = MediaQuery.of(context).size.width;
+
     const String toLaunch = 'http://remerse.com/';
     return Scaffold(
       appBar: AppBar(
@@ -179,68 +179,29 @@ class _ArtistsState extends State<Artists> {
           ],
         ),
       ),
-      body: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(left: 20, top: 20, bottom: 10),
-            child: Row(
-              children: [
-                Text(
-                  'Artists',
-                  style: TextStyle(
-                      fontSize: 22,
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold),
-                ),
-                Container(
-                  height: 30,
-                  width: 50,
-                  alignment: Alignment.center,
-                  margin: const EdgeInsets.only(left: 10),
-                  decoration: BoxDecoration(
-                    color: CustomColors().customPink,
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Text(
-                    artists.length.toString(),
-                    style: TextStyle(
-                      fontSize: 16,
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-              ],
-            ),
+      body: ListView.separated(
+        shrinkWrap: true,
+        separatorBuilder: (context, index) => Divider(),
+        itemCount: artists.length,
+        itemBuilder: (context, index) => ListTile(
+          leading: CircleAvatar(
+            backgroundImage: artists[index].artistArtPath == null
+                ? AssetImage('assets/images/music_gradient.jpg')
+                : Image.file(File(artists[index].artistArtPath)),
           ),
-          SizedBox(
-            height: screenHeight,
-            child: ListView.separated(
-              shrinkWrap: true,
-              separatorBuilder: (context, index) => Divider(),
-              itemCount: artists.length,
-              itemBuilder: (context, index) => ListTile(
-                leading: CircleAvatar(
-                  backgroundImage: artists[index].artistArtPath == null
-                      ? AssetImage('assets/images/music_gradient.jpg')
-                      : Image.file(File(artists[index].artistArtPath)),
+          title: Text(artists[index].name),
+          // title),
+          subtitle: Text(artists[index].numberOfTracks),
+          onTap: () {
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => ArtistSongs(
+                  artistInfo: artists[index],
                 ),
-                title: Text(artists[index].name),
-                // title),
-                subtitle: Text(artists[index].numberOfTracks),
-                onTap: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => ArtistSongs(
-                        artistInfo: artists[index],
-                      ),
-                    ),
-                  );
-                },
               ),
-            ),
-          ),
-        ],
+            );
+          },
+        ),
       ),
     );
   }

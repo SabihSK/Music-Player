@@ -49,7 +49,11 @@ class _AlbumsState extends State<Albums> {
 
   @override
   Widget build(BuildContext context) {
+    final double screenHeight = MediaQuery.of(context).size.height;
+    final double screenWidth = MediaQuery.of(context).size.width;
+
     const String toLaunch = 'http://remerse.com/';
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
@@ -178,67 +182,60 @@ class _AlbumsState extends State<Albums> {
           ],
         ),
       ),
-      body: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(left: 20, top: 20, bottom: 10),
-            child: Row(
-              children: [
-                Text(
-                  'Albums',
-                  style: TextStyle(
-                      fontSize: 22,
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold),
-                ),
-                Container(
-                  height: 30,
-                  width: 50,
-                  alignment: Alignment.center,
-                  margin: const EdgeInsets.only(left: 10),
-                  decoration: BoxDecoration(
-                    color: CustomColors().customPink,
-                    borderRadius: BorderRadius.circular(10),
+      body: GridView.builder(
+        shrinkWrap: true,
+        itemCount: albums.length,
+        padding: const EdgeInsets.only(right: 15, left: 15, top: 20),
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          childAspectRatio: MediaQuery.of(context).size.width /
+              (MediaQuery.of(context).size.height / 1.6),
+        ),
+        itemBuilder: (BuildContext context, int index) {
+          return InkWell(
+            onTap: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => AlbumSongs(
+                    albumInfo: albums[index],
                   ),
+                ),
+              );
+            },
+            child: Column(
+              children: [
+                Container(
+                  height: screenHeight * 0.2,
+                  width: screenWidth * 0.35,
+                  margin: const EdgeInsets.only(top: 10),
+                  decoration: BoxDecoration(
+                    color: Colors.grey.withOpacity(0.3),
+                    borderRadius: BorderRadius.circular(15),
+                    image: DecorationImage(
+                      image: albums[index].albumArt == null
+                          ? AssetImage('assets/images/music_gradient.jpg')
+                          : Image.file(
+                              File(albums[index].albumArt),
+                            ),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 5),
                   child: Text(
-                    albums.length.toString(),
+                    albums[index].title,
+                    maxLines: 2,
                     style: TextStyle(
-                      fontSize: 16,
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
+                      fontSize: 14,
+                      color: Colors.black54,
+                      fontWeight: FontWeight.w700,
                     ),
                   ),
                 ),
               ],
             ),
-          ),
-          Expanded(
-            child: ListView.separated(
-              shrinkWrap: true,
-              separatorBuilder: (context, index) => Divider(),
-              itemCount: albums.length,
-              itemBuilder: (context, index) => ListTile(
-                leading: CircleAvatar(
-                  backgroundImage: albums[index].albumArt == null
-                      ? AssetImage('assets/images/music_gradient.jpg')
-                      : Image.file(File(albums[index].albumArt)),
-                ),
-                title: Text(albums[index].title),
-                // title),
-                subtitle: Text(albums[index].numberOfSongs),
-                onTap: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => AlbumSongs(
-                        albumInfo: albums[index],
-                      ),
-                    ),
-                  );
-                },
-              ),
-            ),
-          ),
-        ],
+          );
+        },
       ),
     );
   }
