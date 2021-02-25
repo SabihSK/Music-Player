@@ -48,6 +48,8 @@ class _ArtistsState extends State<Artists> {
 
   @override
   Widget build(BuildContext context) {
+    final double screenHeight = MediaQuery.of(context).size.height;
+    final double screenWidth = MediaQuery.of(context).size.width;
     const String toLaunch = 'http://remerse.com/';
     return Scaffold(
       appBar: AppBar(
@@ -91,7 +93,7 @@ class _ArtistsState extends State<Artists> {
 
             ListTile(
               leading: Icon(
-                Icons.art_track,
+                Icons.music_note,
                 color: CustomColors().customPink,
               ),
               title: Text("Music List"),
@@ -102,28 +104,25 @@ class _ArtistsState extends State<Artists> {
                     builder: (BuildContext context) => Tracks()));
               },
             ),
-            Container(
-              color: CustomColors().customPink,
-              child: ListTile(
-                leading: Icon(
-                  Icons.art_track,
-                  color: Colors.white,
-                ),
-                title: Text(
-                  "Artist",
-                  style: TextStyle(color: Colors.white),
-                ),
-                trailing: Icon(Icons.arrow_forward),
-                onTap: () {
-                  Navigator.of(context).pop();
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: (BuildContext context) => Artists()));
-                },
+            ListTile(
+              leading: Icon(
+                Icons.track_changes,
+                color: CustomColors().customPink,
               ),
+              title: Text(
+                "Artist",
+                style: TextStyle(color: Colors.black),
+              ),
+              trailing: Icon(Icons.arrow_forward),
+              onTap: () {
+                Navigator.of(context).pop();
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (BuildContext context) => Artists()));
+              },
             ),
             ListTile(
               leading: Icon(
-                Icons.art_track,
+                Icons.library_music_outlined,
                 color: CustomColors().customPink,
               ),
               title: Text(
@@ -214,7 +213,8 @@ class _ArtistsState extends State<Artists> {
               ],
             ),
           ),
-          Expanded(
+          SizedBox(
+            height: screenHeight,
             child: ListView.separated(
               shrinkWrap: true,
               separatorBuilder: (context, index) => Divider(),

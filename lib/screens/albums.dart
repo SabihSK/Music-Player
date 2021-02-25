@@ -92,7 +92,7 @@ class _AlbumsState extends State<Albums> {
 
             ListTile(
               leading: Icon(
-                Icons.art_track,
+                Icons.music_note,
                 color: CustomColors().customPink,
               ),
               title: Text("Music List"),
@@ -103,28 +103,25 @@ class _AlbumsState extends State<Albums> {
                     builder: (BuildContext context) => Tracks()));
               },
             ),
-            Container(
-              color: CustomColors().customPink,
-              child: ListTile(
-                leading: Icon(
-                  Icons.art_track,
-                  color: Colors.white,
-                ),
-                title: Text(
-                  "Artist",
-                  style: TextStyle(color: Colors.white),
-                ),
-                trailing: Icon(Icons.arrow_forward),
-                onTap: () {
-                  Navigator.of(context).pop();
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: (BuildContext context) => Artists()));
-                },
+            ListTile(
+              leading: Icon(
+                Icons.track_changes,
+                color: CustomColors().customPink,
               ),
+              title: Text(
+                "Artist",
+                style: TextStyle(color: Colors.black),
+              ),
+              trailing: Icon(Icons.arrow_forward),
+              onTap: () {
+                Navigator.of(context).pop();
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (BuildContext context) => Artists()));
+              },
             ),
             ListTile(
               leading: Icon(
-                Icons.art_track,
+                Icons.library_music_outlined,
                 color: CustomColors().customPink,
               ),
               title: Text(

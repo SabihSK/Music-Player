@@ -113,66 +113,44 @@ class MusicPlayerState extends State<MusicPlayer> {
       drawer: Drawer(
         child: ListView(
           children: <Widget>[
-            // Container(
-            //   color: CustomColors().customPink,
-            //   child: ListTile(
-            //     leading: Icon(
-            //       Icons.music_note,
-            //       color: CustomColors().customPink,
-            //     ),
-            //     title: Text("Now playing"),
-            //     trailing: Icon(Icons.arrow_forward),
-            //     onTap: () {
-            //       Navigator.of(context).pop();
-            //       Navigator.of(context).push(MaterialPageRoute(
-            //           builder: (BuildContext context) => MusicPlayer()));
-            //     },
+            // ListTile(
+            //   leading: Icon(
+            //     Icons.music_note,
+            //     color: CustomColors().customPink,
             //   ),
+            //   title: Text("Now playing"),
+            //   trailing: Icon(Icons.arrow_forward),
+            //   onTap: () {
+            //     Navigator.of(context).pop();
+            //     Navigator.of(context).push(MaterialPageRoute(
+            //         builder: (BuildContext context) => MusicPlayer()));
+            //   },
             // ),
+
             ListTile(
               leading: Icon(
-                Icons.art_track,
+                Icons.music_note,
                 color: CustomColors().customPink,
               ),
               title: Text("Music List"),
               trailing: Icon(Icons.arrow_forward),
               onTap: () {
-                dispose();
                 Navigator.of(context).pop();
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (BuildContext context) => Tracks(),
-                  ),
-                );
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (BuildContext context) => Tracks()));
               },
             ),
             ListTile(
               leading: Icon(
-                Icons.list,
-                color: CustomColors().customPink,
-              ),
-              title: Text("My favorite"),
-              trailing: Icon(Icons.arrow_forward),
-              onTap: () {
-                Navigator.of(context).pop();
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (BuildContext context) => FavoriteScreen(),
-                  ),
-                );
-              },
-            ),
-            ListTile(
-              leading: Icon(
-                Icons.person,
+                Icons.track_changes,
                 color: CustomColors().customPink,
               ),
               title: Text(
                 "Artist",
+                style: TextStyle(color: Colors.black),
               ),
               trailing: Icon(Icons.arrow_forward),
               onTap: () {
-                dispose();
                 Navigator.of(context).pop();
                 Navigator.of(context).push(MaterialPageRoute(
                     builder: (BuildContext context) => Artists()));
@@ -180,7 +158,7 @@ class MusicPlayerState extends State<MusicPlayer> {
             ),
             ListTile(
               leading: Icon(
-                Icons.album,
+                Icons.library_music_outlined,
                 color: CustomColors().customPink,
               ),
               title: Text(
@@ -189,10 +167,22 @@ class MusicPlayerState extends State<MusicPlayer> {
               ),
               trailing: Icon(Icons.arrow_forward),
               onTap: () {
-                dispose();
                 Navigator.of(context).pop();
                 Navigator.of(context).push(MaterialPageRoute(
                     builder: (BuildContext context) => Albums()));
+              },
+            ),
+            ListTile(
+              leading: Icon(
+                Icons.art_track,
+                color: CustomColors().customPink,
+              ),
+              title: Text("My Favorites"),
+              trailing: Icon(Icons.arrow_forward),
+              onTap: () {
+                Navigator.of(context).pop();
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (BuildContext context) => FavoriteScreen()));
               },
             ),
             ListTile(
@@ -203,7 +193,6 @@ class MusicPlayerState extends State<MusicPlayer> {
               title: Text("Setting"),
               trailing: Icon(Icons.arrow_forward),
               onTap: () {
-                dispose();
                 Navigator.of(context).pop();
                 Navigator.of(context).push(MaterialPageRoute(
                     builder: (BuildContext context) => Setting()));
@@ -217,7 +206,6 @@ class MusicPlayerState extends State<MusicPlayer> {
               title: Text("About Us"),
               trailing: Icon(Icons.arrow_forward),
               onTap: () {
-                dispose();
                 _launched = _launchInBrowser(toLaunch);
                 // Navigator.of(context).pop();
                 // Navigator.of(context).push(MaterialPageRoute(
